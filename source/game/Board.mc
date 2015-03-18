@@ -40,7 +40,7 @@ module Game {
 	
 		function removeRow(row) {
 			for (var tempRow = row; tempRow > 0; tempRow--) {
-				for (var tempCol = col; tempCol < getColumns(); tempCol++) {
+				for (var tempCol = 0; tempCol < getColumns(); tempCol++) {
 					var pieceType = matrix[tempCol][tempRow - 1];
 					matrix[tempCol][tempRow] = pieceType;
 				}
@@ -94,19 +94,19 @@ module Game {
 		
 		function getRowsReadyForRemoval() {
 			// TODO Create an ArrayList class???
-			var completedRows = [maxY];
+			var completedRows = new [maxY];
 			
 			var completedRowsCount = 0;
 			for (var row = maxY - 1; row >= 0; row--) {
 				if (isRowComplete(row)) {
-					completedRows = row;
+					completedRows[completedRowsCount] = row;
 					completedRowsCount++;
 				}
 			}
 			
-			var newArray = [completedRowsCount];
+			var newArray = new [completedRowsCount];
 			for (var i = 0; i < completedRowsCount; i++) {
-				newArray[i] = compeltedRows[i];
+				newArray[i] = completedRows[i];
 			}
 			
 			
@@ -114,7 +114,7 @@ module Game {
 		}
 	
 		hidden function isRowComplete(row) {
-			for (var cols = 0; cols < maxY; cols++) {
+			for (var cols = 0; cols < maxX; cols++) {
 				if (matrix[cols][row] == emptyBlock) {
 					return false;
 				}

@@ -22,7 +22,7 @@ module Game {
 			pieces[6] = T_PIECE;
 			
 			pieceToColorMap = {};
-			pieceToColorMap[L_PIECE] = Gfx.COLOR_BLACK;
+			pieceToColorMap[L_PIECE] = Gfx.COLOR_BLUE;
 			pieceToColorMap[J_PIECE] = Gfx.COLOR_WHITE;
 			pieceToColorMap[I_PIECE] = Gfx.COLOR_RED;
 			pieceToColorMap[Z_PIECE] = Gfx.COLOR_GREEN;

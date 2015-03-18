@@ -14,8 +14,27 @@ class ConnectIQTetrisApp extends App.AppBase {
     //! Return the initial view of your application here
     function getInitialView() {
     	var tetrisGame = new Game.TetrisGame();
-        return [ new ConnectIQTetrisView(tetrisGame), new ConnectIQTetrisDelegate(tetrisGame) ];
+        return [ new ConnectIQTetrisView(tetrisGame), new ConnectIQTetrisInputDelegate(tetrisGame) ];
     }
+}
+
+class ConnectIQTetrisInputDelegate extends Ui.InputDelegate {
+	var tetrisGame;
+	
+	function initialize(tetrisGame) {
+		self.tetrisGame = tetrisGame;
+	}
+	
+	function onKey(evt) {
+		var key = evt.getKey();
+		if (key == Ui.KEY_ESC) {
+			tetrisGame.movePiece(Game.LEFT);
+		} else if (key == Ui.KEY_MENU) {
+			tetrisGame.movePiece(Game.RIGHT);
+		} else if (key == Ui.KEY_ENTER) {
+			tetrisGame.movePiece(Game.ROTATE);
+		}
+	}
 }
 
 class ConnectIQTetrisDelegate extends Ui.BehaviorDelegate {
@@ -25,9 +44,14 @@ class ConnectIQTetrisDelegate extends Ui.BehaviorDelegate {
 	function initialize(tetrisGame) {
 		self.tetrisGame = tetrisGame;
 	}
-
+	
+ 	function onSwipe(evt) {
+ 		debug("onSwipe");
+ 	}
+ 	
     function onBack() {
     	debug("onBack");
+    	return true;
     }
 
     function onMenu() {
@@ -50,6 +74,7 @@ class ConnectIQTetrisDelegate extends Ui.BehaviorDelegate {
     
     function onPreviousMode() {
     	debug("onPreviousMode");
+    	return true;
     }
     	    
     function onPreviousPage() {
